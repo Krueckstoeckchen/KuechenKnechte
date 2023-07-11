@@ -24,7 +24,7 @@ public class CharacterMovement : MonoBehaviour
         movementInput *= speed;
         Vector3 movement = new Vector3(movementInput.x, rigidbody.velocity.y, movementInput.y);
         rigidbody.velocity = movement;
-        if (movement != Vector3.zero)
+        if (movementInput != Vector2.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(new Vector3(movementInput.x, 0, movementInput.y), new Vector3(0f,1f,0f));
             rigidbody.rotation = targetRotation;
