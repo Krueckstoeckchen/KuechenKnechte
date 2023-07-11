@@ -23,7 +23,6 @@ public class CharacterMovement : MonoBehaviour
         Vector2 movementInput = playerInput.getMovementInput();
         
         Vector3 movement = new Vector3(movementInput.x, 0f, movementInput.y);
-        movement = movement.normalized;
         rigidbody.velocity = movement * speed;
         if (movement != Vector3.zero)
         {
