@@ -2,36 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerInput), typeof(Rigidbody))]
 public class CharacterMovement : MonoBehaviour
 {
-
     [SerializeField] private float speed = 5f;
+
     new private Rigidbody rigidbody;
 
+    private PlayerInput playerInput;
+
+    
     void Start()
     {
         rigidbody = this.gameObject.GetComponent<Rigidbody>();
+        playerInput = this.gameObject.GetComponent<PlayerInput>();
     }
 
     void Update()
     {
-        Vector2 movementInput = new Vector2(0f, 0f);
-        if (Input.GetKey(KeyCode.W))
-        {
-            movementInput.y = 1;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            movementInput.y = -1;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            movementInput.x = 1;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            movementInput.x = -1;
-        }
+        Vector2 movementInput = playerInput.getMovementInput();
+        
         Vector3 movement = new Vector3(movementInput.x, 0f, movementInput.y);
         movement = movement.normalized;
         rigidbody.velocity = movement * speed;
