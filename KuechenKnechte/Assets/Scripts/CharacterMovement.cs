@@ -21,12 +21,12 @@ public class CharacterMovement : MonoBehaviour
     void Update()
     {
         Vector2 movementInput = playerInput.getMovementInput();
-        
-        Vector3 movement = new Vector3(movementInput.x, 0f, movementInput.y);
-        rigidbody.velocity = movement * speed;
+        movementInput *= speed;
+        Vector3 movement = new Vector3(movementInput.x, rigidbody.velocity.y, movementInput.y);
+        rigidbody.velocity = movement;
         if (movement != Vector3.zero)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(movement);
+            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(movementInput.x, 0, movementInput.y), new Vector3(0f,1f,0f));
             rigidbody.rotation = targetRotation;
         }
     }
