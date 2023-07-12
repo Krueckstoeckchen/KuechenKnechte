@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6341844509120992471}
   - component: {fileID: 1817982250041643931}
   m_Layer: 0
-  m_Name: Tomato
+  m_Name: Lettuce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 8618959560022155423}
   - component: {fileID: 8016177071148907770}
   m_Layer: 0
-  m_Name: TomatoVisuals
+  m_Name: LettuceVisuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 252db0bcdd2122e438c14076ed992dd1, type: 2}
+  - {fileID: 2100000, guid: 20714602b5ca59e40aaa161db395142b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
