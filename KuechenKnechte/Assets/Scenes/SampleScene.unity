@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 242746607}
   - component: {fileID: 242746606}
   - component: {fileID: 242746605}
+  - component: {fileID: 242746609}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Untagged
@@ -228,6 +229,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &242746609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242746604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1a47715041385942be2abd217148b7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &326456488
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,8 +475,9 @@ GameObject:
   - component: {fileID: 619366773}
   - component: {fileID: 619366776}
   - component: {fileID: 619366775}
-  - component: {fileID: 619366774}
   - component: {fileID: 619366777}
+  - component: {fileID: 619366774}
+  - component: {fileID: 619366778}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -562,6 +576,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919b05ad959f6c84ba77cc1e8ab7b4c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &619366778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619366772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d0d572669e7982428f4fb4d6e59b86e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectingDistance: 2
 --- !u!1 &723630395
 GameObject:
   m_ObjectHideFlags: 0
