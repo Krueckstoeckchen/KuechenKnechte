@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class CharacterInteract : MonoBehaviour
+public class CharacterInteract : MonoBehaviour, IKitchenObjectParent
 {
+    [SerializeField] private Transform kitchenObjectParentPoint;
     [SerializeField] private float selectingDistance = 2f;
     private IInteractable selectedObject = null;
     private PlayerInput playerInput;
+
+    public KitchenObject kitchenObject { get; set; }
 
     void Start()
     {
@@ -42,6 +45,11 @@ public class CharacterInteract : MonoBehaviour
 
     private void OnInteract()
     {
-        if (selectedObject != null) selectedObject.Interact();
+        if (selectedObject != null) selectedObject.Interact(this);
+    }
+
+    public Transform GetKitchenObjectParentPoint()
+    {
+        return kitchenObjectParentPoint;
     }
 }
