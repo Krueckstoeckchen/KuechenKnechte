@@ -6,8 +6,6 @@ public class Counter : MonoBehaviour, IInteractable, IKitchenObjectParent
 
     public KitchenObject kitchenObject { get; set; }
 
-    public KitchenObjectSO kitchenObjectSO;
-
     public void Select()
     {}
 
@@ -33,5 +31,10 @@ public class Counter : MonoBehaviour, IInteractable, IKitchenObjectParent
     public Transform GetKitchenObjectParentPoint()
     {
         return kitchenObjectParentPoint;
+    }
+
+    public void InteractAlternate(CharacterInteract characterInteract)
+    {
+       
     }
 }

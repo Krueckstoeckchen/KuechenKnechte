@@ -18,4 +18,9 @@ public class ContainerCounter : MonoBehaviour, IInteractable
         }
 
     }
+
+    public void InteractAlternate(CharacterInteract characterInteract)
+    {
+        
+    }
 }

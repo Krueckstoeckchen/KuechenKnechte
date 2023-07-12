@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class KitchenObject : MonoBehaviour
 {
+    [SerializeField] private KitchenObjectSO kitchenObjectSO;
     private IKitchenObjectParent parent;
 
     private void Start()
@@ -23,5 +24,10 @@ public class KitchenObject : MonoBehaviour
     {
         parent.kitchenObject = null;
         Destroy(gameObject);
+    }
+
+    public KitchenObjectSO GetKitchenObjectSO()
+    {
+        return kitchenObjectSO;
     }
 }

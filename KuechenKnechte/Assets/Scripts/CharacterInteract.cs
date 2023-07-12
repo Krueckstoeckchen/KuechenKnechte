@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CharacterInteract : MonoBehaviour, IKitchenObjectParent
@@ -13,6 +14,7 @@ public class CharacterInteract : MonoBehaviour, IKitchenObjectParent
     {
         playerInput = this.gameObject.GetComponent<PlayerInput>();
         playerInput.OnInteract += OnInteract;
+        playerInput.OnInteractAlternate += OnInteractAlternate;
     }
 
     private void Update()
@@ -46,6 +48,11 @@ public class CharacterInteract : MonoBehaviour, IKitchenObjectParent
     private void OnInteract()
     {
         if (selectedObject != null) selectedObject.Interact(this);
+    }
+
+    private void OnInteractAlternate()
+    {
+        if (selectedObject != null) selectedObject.InteractAlternate(this);
     }
 
     public Transform GetKitchenObjectParentPoint()

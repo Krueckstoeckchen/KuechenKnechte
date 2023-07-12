@@ -4,4 +4,5 @@ public interface IInteractable
     public void Unselect();
 
     public void Interact(CharacterInteract characterInteract);
+    public void InteractAlternate(CharacterInteract characterInteract);
 }

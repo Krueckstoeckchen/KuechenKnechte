@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2bf3b93ba30004fa7b446fdcac5205, type: 3}
+  m_Name: Tomato2Lettuce
+  m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: 0f53aec6b21ca4a478cb8ad3b6342873, type: 2}
+  output: {fileID: 11400000, guid: b75247455a6aab54fb33bf0aec079402, type: 2}
+  cuts: 3

@@ -18,4 +18,9 @@ public class TrashCounter : MonoBehaviour, IInteractable
         }
 
     }
+
+    public void InteractAlternate(CharacterInteract characterInteract)
+    {
+        
+    }
 }
