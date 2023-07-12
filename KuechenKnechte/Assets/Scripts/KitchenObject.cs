@@ -18,4 +18,10 @@ public class KitchenObject : MonoBehaviour
         transform.parent = newParent.GetKitchenObjectParentPoint();
         transform.localPosition = Vector3.zero;
     }
+
+    public void Delete()
+    {
+        parent.kitchenObject = null;
+        Destroy(gameObject);
+    }
 }
