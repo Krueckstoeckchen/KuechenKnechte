@@ -13,5 +13,4 @@ public class Counter : MonoBehaviour, IInteractable
     {
         Debug.Log("Unselected " + gameObject.name);
     }
-
 }

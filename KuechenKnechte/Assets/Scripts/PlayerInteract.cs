@@ -11,9 +11,13 @@ public class PlayerInteract : MonoBehaviour
         if (Physics.Raycast(transform.position + moveRayPositionUp, transform.forward, out RaycastHit raycastHit, selectingDistance))
         {
             GameObject hittedGameObject = raycastHit.transform.gameObject;
-            if (hittedGameObject.TryGetComponent<IInteractable>(out IInteractable selectableObject) && selectableObject != selectedObject)
+            if (hittedGameObject.TryGetComponent<IInteractable>(out IInteractable selectableObject))
             {
-                ChangeSelectedObject(selectableObject);
+                if (selectableObject != selectedObject) ChangeSelectedObject(selectableObject);
+            }
+            else
+            {
+                ChangeSelectedObject(null);
             }
         }
         else
