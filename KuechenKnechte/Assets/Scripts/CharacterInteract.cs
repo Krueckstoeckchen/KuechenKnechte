@@ -1,9 +1,16 @@
 using UnityEngine;
 
-public class PlayerInteract : MonoBehaviour
+public class CharacterInteract : MonoBehaviour
 {
     [SerializeField] private float selectingDistance = 2f;
     private IInteractable selectedObject = null;
+    private PlayerInput playerInput;
+
+    void Start()
+    {
+        playerInput = this.gameObject.GetComponent<PlayerInput>();
+        playerInput.OnInteract += OnInteract;
+    }
 
     private void Update()
     {
@@ -31,5 +38,10 @@ public class PlayerInteract : MonoBehaviour
         if (selectedObject != null) selectedObject.Unselect();
         selectedObject = newSelectedObject;
         if (selectedObject != null) selectedObject.Select();
+    }
+
+    private void OnInteract()
+    {
+        if (selectedObject != null) selectedObject.Interact();
     }
 }

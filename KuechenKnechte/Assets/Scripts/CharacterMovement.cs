@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInput), typeof(Rigidbody))]
@@ -11,7 +9,6 @@ public class CharacterMovement : MonoBehaviour
 
     private PlayerInput playerInput;
 
-    
     void Start()
     {
         rigidbody = this.gameObject.GetComponent<Rigidbody>();
@@ -20,7 +17,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        Vector2 movementInput = playerInput.getMovementInput();
+        Vector2 movementInput = playerInput.GetMovementInput();
         movementInput *= speed;
         Vector3 movement = new Vector3(movementInput.x, rigidbody.velocity.y, movementInput.y);
         rigidbody.velocity = movement;
