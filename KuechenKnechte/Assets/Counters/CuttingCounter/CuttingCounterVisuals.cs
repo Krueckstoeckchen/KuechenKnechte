@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class ContainerCounterAnimation : MonoBehaviour
+public class CuttingCounterAnimation : MonoBehaviour
 {
-    [SerializeField] private ContainerCounter containerCounter;
+    [SerializeField] private CuttingCounter containerCounter;
     private Animator animator;
 
     private void Awake()
@@ -12,11 +12,11 @@ public class ContainerCounterAnimation : MonoBehaviour
 
     private void Start()
     {
-        containerCounter.OnInteract += PlayAnimation;
+        containerCounter.OnInteractAlternate += PlayAnimation;
     }
 
     private void PlayAnimation()
     {
-        animator.SetTrigger("OpenClose");
+        animator.SetTrigger("Cut");
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CuttingCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
@@ -9,6 +10,8 @@ public class CuttingCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
     public KitchenObject kitchenObject { get; set; }
 
     private int cuttingProgress = 0;
+
+    public event Action OnInteractAlternate;
 
     public void Select()
     { }
@@ -39,6 +42,7 @@ public class CuttingCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
         if (kitchenObject == null) return;
         if (!isInput(kitchenObject.GetKitchenObjectSO())) return;
         cuttingProgress++;
+        OnInteractAlternate?.Invoke();
         if (cuttingProgress >= GetCuttingRecipeSO(kitchenObject.GetKitchenObjectSO()).cuts)
         {
             KitchenObjectSO output = GetCuttingRecipeSO(kitchenObject.GetKitchenObjectSO()).output;
