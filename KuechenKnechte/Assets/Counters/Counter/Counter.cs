@@ -29,17 +29,54 @@ public class Counter : MonoBehaviour, IInteractable, IKitchenObjectParent
         if (kitchenObject != null && characterInteract.kitchenObject != null)
         {
             PlateKitchenObject plate;
+            PanKitchenObject pan;
             if (characterInteract.kitchenObject.IsPlate(out plate))
             {
                 if (plate.TryAddIngredient(kitchenObject.GetKitchenObjectSO())){
                     kitchenObject.Delete();
                     return;
                 }
+
+                if (kitchenObject.IsPan(out pan))
+                {
+                    if (plate.TryAddIngredient(pan.GetIngredient()))
+                    {
+                        pan.ClearPan();
+                        return;
+                    }
+                }
             }
 
             if (kitchenObject.IsPlate(out plate))
             {
                 if (plate.TryAddIngredient(characterInteract.kitchenObject.GetKitchenObjectSO()))
+                {
+                    characterInteract.kitchenObject.Delete();
+                    return;
+                }
+
+                if (characterInteract.kitchenObject.IsPan(out pan))
+                {
+                    if (plate.TryAddIngredient(pan.GetIngredient()))
+                    {
+                        pan.ClearPan();
+                        return;
+                    }
+                }
+            }
+
+            if (characterInteract.kitchenObject.IsPan(out pan))
+            {
+                if (pan.TryAddIngredient(kitchenObject.GetKitchenObjectSO()))
+                {
+                    kitchenObject.Delete();
+                    return;
+                }
+            }
+
+            if (kitchenObject.IsPan(out pan))
+            {
+                if (pan.TryAddIngredient(characterInteract.kitchenObject.GetKitchenObjectSO()))
                 {
                     characterInteract.kitchenObject.Delete();
                     return;

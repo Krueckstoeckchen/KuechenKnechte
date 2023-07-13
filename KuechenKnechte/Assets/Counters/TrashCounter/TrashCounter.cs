@@ -17,12 +17,15 @@ public class TrashCounter : MonoBehaviour, IInteractable
             if (characterInteract.kitchenObject.IsPlate(out PlateKitchenObject plateKitchenObject))
             {
                 plateKitchenObject.ClearPlate();
-            }
-            else
-            {
-                characterInteract.kitchenObject.Delete();
+                return;
             }
 
+            if (characterInteract.kitchenObject.IsPan(out PanKitchenObject panKitchenObject))
+            {
+                panKitchenObject.ClearPan();
+                return;
+            }
+            characterInteract.kitchenObject.Delete();
         }
 
     }

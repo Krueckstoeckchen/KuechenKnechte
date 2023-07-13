@@ -36,4 +36,10 @@ public class KitchenObject : MonoBehaviour
         plateKitchenObject = null;
         return false;
     }
+
+    virtual public bool IsPan(out PanKitchenObject panKitchenObject)
+    {
+        panKitchenObject = null;
+        return false;
+    }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class StoveCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
 {
+    [SerializeField] private KitchenObjectSO startingKitchenObjectSO;
     [SerializeField] private Transform kitchenObjectParentPoint;
 
     [SerializeField] private CookingRecipesSO[] cookingRecipes;
@@ -15,6 +16,11 @@ public class StoveCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
     public event Action<float> OnProgressChange;
     public event Action<float> OnCooking;
 
+    public void Start()
+    {
+        if (startingKitchenObjectSO != null) Instantiate(startingKitchenObjectSO.prefab, kitchenObjectParentPoint);
+    }
+
     public void Select()
     { }
 
@@ -23,7 +29,8 @@ public class StoveCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
 
     public void Interact(CharacterInteract characterInteract)
     {
-        if (kitchenObject == null && characterInteract.kitchenObject != null && IsInput(characterInteract.kitchenObject.GetKitchenObjectSO()))
+        PanKitchenObject panKitchenObject;
+        if (kitchenObject == null && characterInteract.kitchenObject != null && characterInteract.kitchenObject.IsPan(out panKitchenObject))
         {
             characterInteract.kitchenObject.ChangeParent(this);
             progress = 0;
@@ -46,10 +53,34 @@ public class StoveCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
             PlateKitchenObject plate;
             if (characterInteract.kitchenObject.IsPlate(out plate))
             {
-                if (plate.TryAddIngredient(kitchenObject.GetKitchenObjectSO()))
+                if (kitchenObject.IsPan(out panKitchenObject))
                 {
-                    kitchenObject.Delete();
-                    return;
+                    if (panKitchenObject.GetIngredient() != null)
+                    {
+                        if (plate.TryAddIngredient(panKitchenObject.GetIngredient()))
+                        {
+                            panKitchenObject.ClearPan();
+                            OnProgressChange?.Invoke(0f);
+                            OnCooking?.Invoke(0f);
+                            return;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                
+                if (kitchenObject.IsPan(out panKitchenObject))
+                {
+                    
+                    if (panKitchenObject.GetIngredient() == null)
+                    {
+                        if (panKitchenObject.TryAddIngredient(characterInteract.kitchenObject.GetKitchenObjectSO()))
+                        {
+                            characterInteract.kitchenObject.Delete();
+                            return;
+                        }
+                    }
                 }
             }
         }
@@ -57,36 +88,39 @@ public class StoveCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
 
     public void InteractAlternate(CharacterInteract characterInteract)
     {
-       
+
     }
 
     private void Update()
     {
-        if (kitchenObject == null) return;
-        if (!IsInput(kitchenObject.GetKitchenObjectSO())) return;
+        if (kitchenObject == null || !(kitchenObject.IsPan(out PanKitchenObject panKitchenObject))) return;
+
+        KitchenObjectSO panIngredient = panKitchenObject.GetIngredient();
+
+        if (panIngredient == null || !IsInput(panIngredient)) return;
         progress += Time.deltaTime;
-        if (GetCookingRecipeSO(kitchenObject.GetKitchenObjectSO()) != null)
+        if (GetCookingRecipeSO(panIngredient) != null)
         {
-            OnProgressChange?.Invoke(progress / GetCookingRecipeSO(kitchenObject.GetKitchenObjectSO()).cookingTime);
-            OnCooking?.Invoke(progress / GetCookingRecipeSO(kitchenObject.GetKitchenObjectSO()).cookingTime);
-            if (progress >= GetCookingRecipeSO(kitchenObject.GetKitchenObjectSO()).cookingTime)
+            OnProgressChange?.Invoke(progress / GetCookingRecipeSO(panIngredient).cookingTime);
+            OnCooking?.Invoke(progress / GetCookingRecipeSO(panIngredient).cookingTime);
+            if (progress >= GetCookingRecipeSO(panIngredient).cookingTime)
             {
-                KitchenObjectSO output = GetCookingRecipeSO(kitchenObject.GetKitchenObjectSO()).output;
-                kitchenObject.Delete();
-                Instantiate(output.prefab, kitchenObjectParentPoint);
+                KitchenObjectSO output = GetCookingRecipeSO(panIngredient).output;
+                panKitchenObject.ClearPan();
+                panKitchenObject.TryAddIngredient(output);
                 progress = 0;
                 return;
             }
         }
 
-        if (GetBurningRecipeSO(kitchenObject.GetKitchenObjectSO()) != null)
+        if (GetBurningRecipeSO(panIngredient) != null)
         {
-            OnCooking?.Invoke(progress / GetBurningRecipeSO(kitchenObject.GetKitchenObjectSO()).burningTime);
-            if (progress >= GetBurningRecipeSO(kitchenObject.GetKitchenObjectSO()).burningTime)
+            OnCooking?.Invoke(progress / GetBurningRecipeSO(panIngredient).burningTime);
+            if (progress >= GetBurningRecipeSO(panIngredient).burningTime)
             {
-                KitchenObjectSO output = GetBurningRecipeSO(kitchenObject.GetKitchenObjectSO()).output;
-                kitchenObject.Delete();
-                Instantiate(output.prefab, kitchenObjectParentPoint);
+                KitchenObjectSO output = GetBurningRecipeSO(panIngredient).output;
+                panKitchenObject.ClearPan();
+                panKitchenObject.TryAddIngredient(output);
                 progress = 0;
                 return;
             }

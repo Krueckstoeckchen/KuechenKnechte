@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cc083cec459804d918a4720c354c35, type: 3}
   m_Name: Pan
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 3026456019794252740, guid: 07449ec2b2134d441bb105e87ea7aef0, type: 3}
   objectName: Pan
   sprite: {fileID: 0}

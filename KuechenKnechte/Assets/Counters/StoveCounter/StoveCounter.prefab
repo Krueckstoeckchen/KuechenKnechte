@@ -175,10 +175,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973082b77ab90994d987141da221d51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingKitchenObjectSO: {fileID: 11400000, guid: 8a0ec4f1b012ecb488b38c99a36802e8,
+    type: 2}
   kitchenObjectParentPoint: {fileID: 668108459815033111}
   cookingRecipes:
   - {fileID: 11400000, guid: d15bd938c79101a428cb560e4c9d5447, type: 2}
-  burningRecipes: []
+  burningRecipes:
+  - {fileID: 11400000, guid: 203e5e466f877714287a33658d145ba4, type: 2}
 --- !u!1 &6250373723352735875
 GameObject:
   m_ObjectHideFlags: 0
