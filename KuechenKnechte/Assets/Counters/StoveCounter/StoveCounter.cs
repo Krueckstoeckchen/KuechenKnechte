@@ -60,6 +60,7 @@ public class StoveCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
                         if (plate.TryAddIngredient(panKitchenObject.GetIngredient()))
                         {
                             panKitchenObject.ClearPan();
+                            progress = 0;
                             OnProgressChange?.Invoke(0f);
                             OnCooking?.Invoke(0f);
                             return;
