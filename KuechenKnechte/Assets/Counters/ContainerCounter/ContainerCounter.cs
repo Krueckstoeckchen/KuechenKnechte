@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 public class ContainerCounter : MonoBehaviour, IInteractable
 {
     public KitchenObjectSO kitchenObjectSO;
 
+    public event Action OnInteract;
+ 
     public void Select()
     { }
 
@@ -15,6 +18,7 @@ public class ContainerCounter : MonoBehaviour, IInteractable
         if (characterInteract.kitchenObject == null)
         {
             Instantiate(kitchenObjectSO.prefab, characterInteract.GetKitchenObjectParentPoint());
+            OnInteract?.Invoke();
         }
 
     }
