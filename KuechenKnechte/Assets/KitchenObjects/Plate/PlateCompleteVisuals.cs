@@ -14,11 +14,16 @@ public class PlateCompleteVisuals : MonoBehaviour
 
     [SerializeField] private PlateKitchenObject plateKitchenObject;
     [SerializeField] private List<KitchenObjectSO_GameObject> kitchenObjectSO_GameObjects;
+    [SerializeField] private GameObject iconPrefab;
+    [SerializeField] private GameObject iconCanvas;
+
+    private List<GameObject> icons;
 
     private void Start()
     {
         plateKitchenObject.OnIngredientAdded += AddIngredient;
         plateKitchenObject.OnClear += ClearIngredients;
+        icons = new List<GameObject>();
         ClearIngredients();
     }
 
@@ -26,8 +31,14 @@ public class PlateCompleteVisuals : MonoBehaviour
     {
         foreach (KitchenObjectSO_GameObject kitchenObjectSO_GameObject in kitchenObjectSO_GameObjects)
         {
-            if (kitchenObjectSO_GameObject.kitchenObjectSO == addedKitchenObjectSO) kitchenObjectSO_GameObject.gameObject.SetActive(true);
+            if (kitchenObjectSO_GameObject.kitchenObjectSO == addedKitchenObjectSO)
+            {
+                kitchenObjectSO_GameObject.gameObject.SetActive(true);
+            }
         }
+        GameObject newIcon = Instantiate(iconPrefab, iconCanvas.transform);
+        newIcon.GetComponent<Icon>().SetKitchenObjectSO(addedKitchenObjectSO);
+        icons.Add(newIcon);
     }
 
     private void ClearIngredients()
@@ -36,5 +47,11 @@ public class PlateCompleteVisuals : MonoBehaviour
         {
             kitchenObjectSO_GameObject.gameObject.SetActive(false);
         }
+
+        foreach (GameObject icon in icons)
+        {
+            Destroy(icon);
+        }
+        icons.Clear();
     }
 }

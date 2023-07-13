@@ -29,7 +29,6 @@ public class PlatesCounter : MonoBehaviour, IInteractable
             OnPlateCountChanged?.Invoke(plates);
             Instantiate(plate.prefab, characterInteract.GetKitchenObjectParentPoint());
         }
-
     }
 
     public void InteractAlternate(CharacterInteract characterInteract)
