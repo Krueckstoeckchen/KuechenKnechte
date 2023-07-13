@@ -38,6 +38,18 @@ public class CuttingCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
             return;
         }
 
+        if (kitchenObject != null && characterInteract.kitchenObject != null)
+        {
+            PlateKitchenObject plate;
+            if (characterInteract.kitchenObject.IsPlate(out plate))
+            {
+                if (plate.TryAddIngredient(kitchenObject.GetKitchenObjectSO()))
+                {
+                    kitchenObject.Delete();
+                    return;
+                }
+            }
+        }
     }
 
     public void InteractAlternate(CharacterInteract characterInteract)

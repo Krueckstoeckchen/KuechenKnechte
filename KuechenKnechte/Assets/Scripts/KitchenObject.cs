@@ -30,4 +30,10 @@ public class KitchenObject : MonoBehaviour
     {
         return kitchenObjectSO;
     }
+
+    virtual public bool IsPlate(out PlateKitchenObject plateKitchenObject)
+    {
+        plateKitchenObject = null;
+        return false;
+    }
 }

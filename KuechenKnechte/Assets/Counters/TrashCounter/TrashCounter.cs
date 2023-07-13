@@ -14,13 +14,21 @@ public class TrashCounter : MonoBehaviour, IInteractable
     {
         if (characterInteract.kitchenObject != null)
         {
-            characterInteract.kitchenObject.Delete();
+            if (characterInteract.kitchenObject.IsPlate(out PlateKitchenObject plateKitchenObject))
+            {
+                plateKitchenObject.ClearPlate();
+            }
+            else
+            {
+                characterInteract.kitchenObject.Delete();
+            }
+
         }
 
     }
 
     public void InteractAlternate(CharacterInteract characterInteract)
     {
-        
+
     }
 }

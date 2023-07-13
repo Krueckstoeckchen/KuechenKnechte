@@ -25,7 +25,27 @@ public class Counter : MonoBehaviour, IInteractable, IKitchenObjectParent
             kitchenObject.ChangeParent(characterInteract);
             return;
         }
-        
+
+        if (kitchenObject != null && characterInteract.kitchenObject != null)
+        {
+            PlateKitchenObject plate;
+            if (characterInteract.kitchenObject.IsPlate(out plate))
+            {
+                if (plate.TryAddIngredient(kitchenObject.GetKitchenObjectSO())){
+                    kitchenObject.Delete();
+                    return;
+                }
+            }
+
+            if (kitchenObject.IsPlate(out plate))
+            {
+                if (plate.TryAddIngredient(characterInteract.kitchenObject.GetKitchenObjectSO()))
+                {
+                    characterInteract.kitchenObject.Delete();
+                    return;
+                }
+            }
+        }
     }
 
     public Transform GetKitchenObjectParentPoint()
