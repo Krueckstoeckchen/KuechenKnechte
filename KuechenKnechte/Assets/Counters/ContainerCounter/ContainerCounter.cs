@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ContainerCounter : MonoBehaviour, IInteractable
 {
-    public KitchenObjectSO kitchenObjectSO;
+    [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
     public event Action OnInteract;
  
