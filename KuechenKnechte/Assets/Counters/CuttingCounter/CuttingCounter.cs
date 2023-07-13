@@ -12,6 +12,7 @@ public class CuttingCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
     private int cuttingProgress = 0;
 
     public event Action OnInteractAlternate;
+    public event Action<float> OnProgressChange;
 
     public void Select()
     { }
@@ -25,6 +26,7 @@ public class CuttingCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
         {
             characterInteract.kitchenObject.ChangeParent(this);
             cuttingProgress = 0;
+            OnProgressChange?.Invoke(0f);
             return;
         }
 
@@ -32,6 +34,7 @@ public class CuttingCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
         {
             kitchenObject.ChangeParent(characterInteract);
             cuttingProgress = 0;
+            OnProgressChange?.Invoke(0f);
             return;
         }
 
@@ -43,6 +46,7 @@ public class CuttingCounter : MonoBehaviour, IInteractable, IKitchenObjectParent
         if (!isInput(kitchenObject.GetKitchenObjectSO())) return;
         cuttingProgress++;
         OnInteractAlternate?.Invoke();
+        OnProgressChange?.Invoke((float)cuttingProgress/GetCuttingRecipeSO(kitchenObject.GetKitchenObjectSO()).cuts);
         if (cuttingProgress >= GetCuttingRecipeSO(kitchenObject.GetKitchenObjectSO()).cuts)
         {
             KitchenObjectSO output = GetCuttingRecipeSO(kitchenObject.GetKitchenObjectSO()).output;
