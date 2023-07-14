@@ -13,6 +13,7 @@ public class DeliveryCounter : MonoBehaviour, IInteractable
         {
             if (characterInteract.kitchenObject.IsPlate(out PlateKitchenObject plateKitchenObject))
             {
+                DeliveryManager.Instance.DeliverRecipe(plateKitchenObject);
                 characterInteract.kitchenObject.Delete();
             }
         }

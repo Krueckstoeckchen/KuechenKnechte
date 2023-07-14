@@ -37,4 +37,9 @@ public class PlateKitchenObject : KitchenObject
         ingredients.Clear();
         OnClear?.Invoke();
     }
+
+    public List<KitchenObjectSO> GetIngredients()
+    {
+        return ingredients;
+    }
 }
